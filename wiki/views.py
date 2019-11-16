@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+# from django.views.generic.create import FormView
 
 from wiki.models import Page
 
@@ -26,3 +27,16 @@ class PageDetailView(DetailView):
         return render(request, 'page.html', {
           'page': page
         })
+# class PageCreateView(FormView):
+#     template_name = "page.html"
+#     form_class = PageForm
+#     success_url = '/'
+#
+#     def post(self, request):
+#         page_form = PageForm(request.POST)
+#         page = page_form.save(commit=False)
+#         page.author = User.objects.get(id=request.POST('author'))
+#         page.save()
+#         return redirect(page)
+#     def form_valid(self, form):
+#         return super().form_valid(form)
