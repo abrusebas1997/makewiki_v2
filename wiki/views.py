@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-# from django.views.generic.create import FormView
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
 
+
+from wiki.forms import PageForm
 from wiki.models import Page
+from django.http import HttpResponse, HttpResponseRedirect
 
 
 class PageListView(ListView):
@@ -27,16 +31,20 @@ class PageDetailView(DetailView):
         return render(request, 'page.html', {
           'page': page
         })
-# class PageCreateView(FormView):
-#     template_name = "page.html"
-#     form_class = PageForm
-#     success_url = '/'
-#
-#     def post(self, request):
-#         page_form = PageForm(request.POST)
-#         page = page_form.save(commit=False)
-#         page.author = User.objects.get(id=request.POST('author'))
-#         page.save()
-#         return redirect(page)
-#     def form_valid(self, form):
-#         return super().form_valid(form)
+class PageCreateView(CreateView):
+    form_class = PageForm
+    # success_url = reverse_lazy('list.html')
+    template_name = "new_page.html"
+
+    def post(self, request, *args, **kwargs):
+        form = PageForm(request.POST)
+        if form.is_valid():
+            wiki = form.save()
+            wiki.save()
+            return HttpResponseRedirect(reverse_lazy("wiki-list-page"))
+    #     page = page_form.save(commit=False)
+    #     page.author = User.objects.get(id=request.POST('author'))
+    #     page.save()
+    #     return redirect(page)
+    # def form_valid(self, form):
+    #     return super().form_valid(form)
