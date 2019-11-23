@@ -41,7 +41,7 @@ class PageCreateView(CreateView):
         if form.is_valid():
             wiki = form.save()
             wiki.save()
-            return HttpResponseRedirect(reverse_lazy("wiki-list-page"))
+            return HttpResponseRedirect(reverse_lazy("wiki-details-page", args=[wiki.slug]))
     #     page = page_form.save(commit=False)
     #     page.author = User.objects.get(id=request.POST('author'))
     #     page.save()
