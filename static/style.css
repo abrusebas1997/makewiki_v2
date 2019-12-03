@@ -1,4 +1,8 @@
 body {
-    background: white url("img2.jpg") center;
+    background: url("img2.jpg");
+    height: 100%;
+    background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
+
 }
