@@ -9,7 +9,7 @@ Click==7.0
 confusable-homoglyphs==3.2.0
 dj-database-url==0.5.0
 -e git+https://github.com/django/django.git@1711c509faf3111bdf5a3a860b2cd01c0dc5d233#egg=Django
-django-registration==3.0.1
+django-registration==3.1.2
 django-settings==1.3.12
 djangorestframework==3.10.3
 Flask==1.1.1
